@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/bpmn20" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="_Lqf_UAtKEeyo_79kZW3Fzg" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd http://www.omg.org/spec/DD/20100524/DC DC.xsd http://www.omg.org/spec/DD/20100524/DI DI.xsd " exporter="jBPM Process Modeler" exporterVersion="2.0" targetNamespace="http://www.omg.org/bpmn20">
+  <bpmn2:itemDefinition id="_empItem" structureRef="Object"/>
+  <bpmn2:itemDefinition id="__33E2C9F4-D8D0-4032-8FF1-19188BCE4839_empInputXItem" structureRef="Object"/>
+  <bpmn2:itemDefinition id="__33E2C9F4-D8D0-4032-8FF1-19188BCE4839_empOutputXItem" structureRef="Object"/>
+  <bpmn2:process id="jbpm-custom-workitem-handler.CustomWIHProcess" drools:packageName="com.poc.jbpm_custom_workitem_handler" drools:version="1.0" drools:adHoc="false" name="CustomWIHProcess" isExecutable="true" processType="Public">
+    <bpmn2:property id="emp" itemSubjectRef="_empItem" name="emp">
+      <bpmn2:extensionElements>
+        <drools:metaData name="customTags">
+          <drools:metaValue><![CDATA[emp]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+    </bpmn2:property>
+    <bpmn2:sequenceFlow id="_2F3E2FC2-4274-42CE-A329-4E6E1421D150" sourceRef="_CCE90DE2-EEFB-42C1-84D8-6F24E7A50634" targetRef="_33E2C9F4-D8D0-4032-8FF1-19188BCE4839"/>
+    <bpmn2:sequenceFlow id="_701FF082-249E-40F6-B36A-5E728743A548" sourceRef="_33E2C9F4-D8D0-4032-8FF1-19188BCE4839" targetRef="_09EE40FD-2E67-4482-B005-A41309F8E461">
+      <bpmn2:extensionElements>
+        <drools:metaData name="isAutoConnection.source">
+          <drools:metaValue><![CDATA[true]]></drools:metaValue>
+        </drools:metaData>
+        <drools:metaData name="isAutoConnection.target">
+          <drools:metaValue><![CDATA[true]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+    </bpmn2:sequenceFlow>
+    <bpmn2:startEvent id="_CCE90DE2-EEFB-42C1-84D8-6F24E7A50634">
+      <bpmn2:outgoing>_2F3E2FC2-4274-42CE-A329-4E6E1421D150</bpmn2:outgoing>
+    </bpmn2:startEvent>
+    <bpmn2:task id="_33E2C9F4-D8D0-4032-8FF1-19188BCE4839" drools:taskName="CustomWIH" name="CustomWIH">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[CustomWIH]]></drools:metaValue>
+        </drools:metaData>
+        <drools:onEntry-script scriptFormat="http://www.java.com/java">
+          <drools:script><![CDATA[com.custom.wih.Employee empLocal = new com.custom.wih.Employee();
+empLocal.setEmpId("1");
+empLocal.setEmpName("Pravin");
+
+kcontext.setVariable("emp", empLocal);]]></drools:script>
+        </drools:onEntry-script>
+        <drools:onExit-script scriptFormat="http://www.java.com/java">
+          <drools:script><![CDATA[com.custom.wih.Employee empLocal = (com.custom.wih.Employee)kcontext.getVariable("emp");
+String name = empLocal.getEmpName();
+System.out.println("Employee Name after modification is :: "+name);]]></drools:script>
+        </drools:onExit-script>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>_2F3E2FC2-4274-42CE-A329-4E6E1421D150</bpmn2:incoming>
+      <bpmn2:outgoing>_701FF082-249E-40F6-B36A-5E728743A548</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="_Lqf_UQtKEeyo_79kZW3Fzg">
+        <bpmn2:dataInput id="_33E2C9F4-D8D0-4032-8FF1-19188BCE4839_empInputX" drools:dtype="Object" itemSubjectRef="__33E2C9F4-D8D0-4032-8FF1-19188BCE4839_empInputXItem" name="emp"/>
+        <bpmn2:dataInput id="_33E2C9F4-D8D0-4032-8FF1-19188BCE4839_TaskNameInputX" drools:dtype="Object" name="TaskName"/>
+        <bpmn2:dataOutput id="_33E2C9F4-D8D0-4032-8FF1-19188BCE4839_empOutputX" drools:dtype="Object" itemSubjectRef="__33E2C9F4-D8D0-4032-8FF1-19188BCE4839_empOutputXItem" name="emp"/>
+        <bpmn2:inputSet id="_Lqf_UgtKEeyo_79kZW3Fzg">
+          <bpmn2:dataInputRefs>_33E2C9F4-D8D0-4032-8FF1-19188BCE4839_empInputX</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_33E2C9F4-D8D0-4032-8FF1-19188BCE4839_TaskNameInputX</bpmn2:dataInputRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="_Lqf_UwtKEeyo_79kZW3Fzg">
+          <bpmn2:dataOutputRefs>_33E2C9F4-D8D0-4032-8FF1-19188BCE4839_empOutputX</bpmn2:dataOutputRefs>
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation id="_Lqf_VAtKEeyo_79kZW3Fzg">
+        <bpmn2:sourceRef>emp</bpmn2:sourceRef>
+        <bpmn2:targetRef>_33E2C9F4-D8D0-4032-8FF1-19188BCE4839_empInputX</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="_Lqf_VQtKEeyo_79kZW3Fzg">
+        <bpmn2:targetRef>_33E2C9F4-D8D0-4032-8FF1-19188BCE4839_TaskNameInputX</bpmn2:targetRef>
+        <bpmn2:assignment id="_Lqf_VgtKEeyo_79kZW3Fzg">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_Lqf_VwtKEeyo_79kZW3Fzg"><![CDATA[CustomWIH]]></bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="_Lqf_WAtKEeyo_79kZW3Fzg">_33E2C9F4-D8D0-4032-8FF1-19188BCE4839_TaskNameInputX</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataOutputAssociation id="_Lqf_WQtKEeyo_79kZW3Fzg">
+        <bpmn2:sourceRef>_33E2C9F4-D8D0-4032-8FF1-19188BCE4839_empOutputX</bpmn2:sourceRef>
+        <bpmn2:targetRef>emp</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+    </bpmn2:task>
+    <bpmn2:endEvent id="_09EE40FD-2E67-4482-B005-A41309F8E461">
+      <bpmn2:incoming>_701FF082-249E-40F6-B36A-5E728743A548</bpmn2:incoming>
+    </bpmn2:endEvent>
+  </bpmn2:process>
+  <bpmndi:BPMNDiagram id="_Lqf_WgtKEeyo_79kZW3Fzg">
+    <bpmndi:BPMNPlane id="_Lqf_WwtKEeyo_79kZW3Fzg" bpmnElement="jbpm-custom-workitem-handler.CustomWIHProcess">
+      <bpmndi:BPMNShape id="shape__09EE40FD-2E67-4482-B005-A41309F8E461" bpmnElement="_09EE40FD-2E67-4482-B005-A41309F8E461">
+        <dc:Bounds height="56.0" width="56.0" x="529.0" y="95.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="shape__33E2C9F4-D8D0-4032-8FF1-19188BCE4839" bpmnElement="_33E2C9F4-D8D0-4032-8FF1-19188BCE4839">
+        <dc:Bounds height="102.0" width="154.0" x="294.0" y="72.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="shape__CCE90DE2-EEFB-42C1-84D8-6F24E7A50634" bpmnElement="_CCE90DE2-EEFB-42C1-84D8-6F24E7A50634">
+        <dc:Bounds height="56.0" width="56.0" x="98.0" y="95.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="edge_shape__33E2C9F4-D8D0-4032-8FF1-19188BCE4839_to_shape__09EE40FD-2E67-4482-B005-A41309F8E461" bpmnElement="_701FF082-249E-40F6-B36A-5E728743A548">
+        <di:waypoint xsi:type="dc:Point" x="448.0" y="123.0"/>
+        <di:waypoint xsi:type="dc:Point" x="529.0" y="123.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="edge_shape__CCE90DE2-EEFB-42C1-84D8-6F24E7A50634_to_shape__33E2C9F4-D8D0-4032-8FF1-19188BCE4839" bpmnElement="_2F3E2FC2-4274-42CE-A329-4E6E1421D150">
+        <di:waypoint xsi:type="dc:Point" x="126.0" y="123.0"/>
+        <di:waypoint xsi:type="dc:Point" x="294.0" y="123.0"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  <bpmn2:relationship id="_Lqf_XAtKEeyo_79kZW3Fzg" type="BPSimData">
+    <bpmn2:extensionElements>
+      <bpsim:BPSimData>
+        <bpsim:Scenario xsi:type="bpsim:Scenario" id="default" name="Simulationscenario">
+          <bpsim:ScenarioParameters xsi:type="bpsim:ScenarioParameters"/>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_33E2C9F4-D8D0-4032-8FF1-19188BCE4839" id="_Lqf_XQtKEeyo_79kZW3Fzg">
+            <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
+              <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
+                <bpsim:NormalDistribution mean="0.0" standardDeviation="0.0"/>
+              </bpsim:ProcessingTime>
+            </bpsim:TimeParameters>
+            <bpsim:ResourceParameters xsi:type="bpsim:ResourceParameters">
+              <bpsim:Availability xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="0.0"/>
+              </bpsim:Availability>
+              <bpsim:Quantity xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="0.0"/>
+              </bpsim:Quantity>
+            </bpsim:ResourceParameters>
+            <bpsim:CostParameters xsi:type="bpsim:CostParameters">
+              <bpsim:UnitCost xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="0.0"/>
+              </bpsim:UnitCost>
+            </bpsim:CostParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_CCE90DE2-EEFB-42C1-84D8-6F24E7A50634" id="_Lqf_XgtKEeyo_79kZW3Fzg">
+            <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
+              <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
+                <bpsim:NormalDistribution mean="0.0" standardDeviation="0.0"/>
+              </bpsim:ProcessingTime>
+            </bpsim:TimeParameters>
+          </bpsim:ElementParameters>
+        </bpsim:Scenario>
+      </bpsim:BPSimData>
+    </bpmn2:extensionElements>
+    <bpmn2:source>_Lqf_UAtKEeyo_79kZW3Fzg</bpmn2:source>
+    <bpmn2:target>_Lqf_UAtKEeyo_79kZW3Fzg</bpmn2:target>
+  </bpmn2:relationship>
+</bpmn2:definitions>
